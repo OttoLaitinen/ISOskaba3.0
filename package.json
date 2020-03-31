@@ -1,0 +1,21 @@
+{
+  "name": "isoskaba3.0",
+  "version": "1.0.0",
+  "description": "ISOskaba 3.0",
+  "scripts": {
+    "test": "npm run lint",
+    "dco": "docker-compose",
+    "logs": "npm run dco -- logs --tail='500' -f",
+    "start": "npm run dco -- up -d && npm run logs",
+    "lint": "npm run lint --prefix ./isoskaba-back",
+    "down": "npm run dco -- down"
+  },
+  "author": "Otto Laitinen",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^4.2.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}
