@@ -11,7 +11,6 @@
     "lint": "npm run lint --prefix ./isoskaba-back",
     "lintfix": "npm run lintfix --prefix ./isoskaba-back",
     "down": "npm run dco -- down"
-
   },
   "author": "Otto Laitinen",
   "license": "ISC",
@@ -20,7 +19,6 @@
       "pre-push": "npm test"
     }
   },
-
   "devDependencies": {
     "husky": "^4.2.3"
   },
@@ -28,5 +26,3 @@
     "lodash": "^4.17.15"
   }
 }
-
-
