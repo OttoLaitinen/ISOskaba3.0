@@ -1,4 +1,4 @@
-version: 3.7
+version: "3.7"
 
 services:
     isoskaba-back:
@@ -6,8 +6,6 @@ services:
             context: isoskaba-back
             args:
               NODE_ENV: "development"
-        env_file:
-            - .env
         environment:
             COOKIE_SECRET: dev
             SWAGGER_TOKEN: dev
@@ -36,7 +34,7 @@ services:
         container_name: isoskaba-db
         
 volumes:
-    medified-pgdata:
+    isoskaba-pgdata:
         
       
       
