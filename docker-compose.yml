@@ -8,14 +8,6 @@ services:
         NODE_ENV: 'development'
     env_file:
         - .env
-    environment:
-      COOKIE_SECRET: dev
-      SWAGGER_TOKEN: dev
-      DB_USERNAME: dev
-      DB_PASSWORD: dev
-      DB_PORT: 5432
-      DB_HOST: isoskaba-db
-      DB_DATABASE: isoskaba-db
     command: 'npm run start:dev'
     ports:
       - 8080:8080
@@ -27,10 +19,8 @@ services:
 
   isoskaba-db:
     image: postgres:9.6.3
-    environment:
-      POSTGRES_USER: dev
-      POSTGRES_PASSWORD: dev
-      POSTGRES_DB: isoskaba-db
+    env_file:
+      - .env-db
     volumes:
       - isoskaba-pgdata:/var/lib/postgresql/data
     container_name: isoskaba-db

@@ -8,7 +8,6 @@
     "start:dev": "nodemon ./src/index.js",
     "test": "npm run lint",
     "lint": "eslint ."
-    
   },
   "author": "Otto Laitinen",
   "license": "ISC",
@@ -16,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.2.1",
     "sequelize": "^5.21.6",
     "umzug": "^2.3.0"
