@@ -43,7 +43,7 @@ const login = async (req, res) => {
   const givenPasswordHashed = crypto.pbkdf2Sync(password, userSalt, 100000, 64, 'sha512').toString('hex')
 
   if (userPasswordHash !== givenPasswordHashed) throw new ApplicationError('Login failure', 403)
-  
+
   const token = jwt.sign({ username: foundUser.username, role: foundUser.role }, process.env.TOKEN_SECRET, {
     expiresIn: '1h'
   })

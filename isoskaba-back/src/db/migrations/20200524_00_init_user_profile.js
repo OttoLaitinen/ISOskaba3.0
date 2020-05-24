@@ -16,7 +16,7 @@ module.exports = {
         type: STRING
       },
       salt: {
-          type: STRING
+        type: STRING
       },
       first_name: {
         type: STRING

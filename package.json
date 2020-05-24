@@ -21,7 +21,7 @@
     }
   },
   "devDependencies": {
-    "husky": "^4.2.3"
+    "husky": "^4.2.5"
   },
   "dependencies": {
     "lodash": "^4.17.15",

@@ -4,7 +4,6 @@ const authMiddleware = require('../middleware/auth')
 const { register, login } = require('./auth')
 
 const initRoutes = app => {
-
   app.post('/v1/register', register)
 
   app.post('/v1/login', login)
