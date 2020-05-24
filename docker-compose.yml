@@ -1,40 +1,39 @@
-version: "3.7"
+version: '3.7'
 
 services:
-    isoskaba-back:
-        build:
-            context: isoskaba-back
-            args:
-              NODE_ENV: "development"
-        environment:
-            COOKIE_SECRET: dev
-            SWAGGER_TOKEN: dev
-            DB_USERNAME: dev
-            DB_PASSWORD: dev
-            DB_PORT: 5432
-            DB_HOST: isoskaba-db
-            DB_DATABASE: isoskaba-db
-        command: "npm run start:dev"
-        ports:
-            - 8080:8080
-        volumes:
-            - ./isoskaba-back:/usr/src/app
-        depends_on:
-            - isoskaba-db
-        container_name: isoskaba-back
+  isoskaba-back:
+    build:
+      context: isoskaba-back
+      args:
+        NODE_ENV: 'development'
+    env_file:
+        - .env
+    environment:
+      COOKIE_SECRET: dev
+      SWAGGER_TOKEN: dev
+      DB_USERNAME: dev
+      DB_PASSWORD: dev
+      DB_PORT: 5432
+      DB_HOST: isoskaba-db
+      DB_DATABASE: isoskaba-db
+    command: 'npm run start:dev'
+    ports:
+      - 8080:8080
+    volumes:
+      - ./isoskaba-back:/usr/src/app
+    depends_on:
+      - isoskaba-db
+    container_name: isoskaba-back
 
-    isoskaba-db:
-        image: postgres:9.6.3
-        environment:
-            POSTGRES_USER: dev
-            POSTGRES_PASSWORD: dev
-            POSTGRES_DB: isoskaba-db
-        volumes:
-            - isoskaba-pgdata:/var/lib/postgresql/data
-        container_name: isoskaba-db
-        
+  isoskaba-db:
+    image: postgres:9.6.3
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: isoskaba-db
+    volumes:
+      - isoskaba-pgdata:/var/lib/postgresql/data
+    container_name: isoskaba-db
+
 volumes:
-    isoskaba-pgdata:
-        
-      
-      
+  isoskaba-pgdata:
