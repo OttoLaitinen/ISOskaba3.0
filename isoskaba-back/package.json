@@ -8,6 +8,7 @@
     "start:dev": "nodemon ./src/index.js",
     "test": "npm run lint",
     "lint": "eslint ."
+    
   },
   "author": "Otto Laitinen",
   "license": "ISC",
@@ -16,7 +17,8 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "pg": "^8.2.1",
-    "sequelize": "^5.21.6"
+    "sequelize": "^5.21.6",
+    "umzug": "^2.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

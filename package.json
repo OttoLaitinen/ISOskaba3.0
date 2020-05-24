@@ -10,7 +10,8 @@
     "start": "npm run dco -- up -d && npm run logs",
     "lint": "npm run lint --prefix ./isoskaba-back",
     "lintfix": "npm run lintfix --prefix ./isoskaba-back",
-    "down": "npm run dco -- down"
+    "down": "npm run dco -- down",
+    "db": "docker exec -it -u postgres isoskaba-db psql isoskaba-db"
   },
   "author": "Otto Laitinen",
   "license": "ISC",
