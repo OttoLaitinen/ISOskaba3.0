@@ -1,4 +1,4 @@
-const { Model, STRING, INTEGER, DATE, BIGINT, ENUM } = require('sequelize')
+const { Model, STRING, DATE, BIGINT, ENUM } = require('sequelize')
 const { sequelize } = require('../connection')
 
 class User extends Model {}
