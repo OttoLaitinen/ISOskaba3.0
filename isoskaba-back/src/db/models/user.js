@@ -5,7 +5,7 @@ class User extends Model {}
 
 User.init(
   {
-    user_id: {
+    userId: {
       primaryKey: true,
       type: BIGINT,
       autoIncrement: true
@@ -33,10 +33,10 @@ User.init(
     role: {
       type: ENUM('USER', 'ADMIN', 'SUPERADMIN')
     },
-    created_at: {
+    createdAt: {
       type: DATE
     },
-    updated_at: {
+    updatedAt: {
       type: DATE
     }
   },

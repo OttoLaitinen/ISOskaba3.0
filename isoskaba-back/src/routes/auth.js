@@ -18,6 +18,8 @@ const register = async (req, res) => {
     email,
     salt,
     password: hashedPassword,
+    firstName: '',
+    lastName: '',
     role: 'USER'
   })
 

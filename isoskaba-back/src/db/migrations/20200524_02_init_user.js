@@ -1,4 +1,4 @@
-const { STRING, DATE, BIGINT, ENUM } = require('sequelize')
+const { STRING, DATE, BIGINT, ENUM, ARRAY } = require('sequelize')
 
 module.exports = {
   up: async queryInterface => {
@@ -13,23 +13,29 @@ module.exports = {
         unique: true
       },
       password: {
-        type: STRING
+        type: STRING,
+        allowNull: false
       },
       salt: {
-        type: STRING
+        type: STRING,
+        allowNull: false
       },
       first_name: {
-        type: STRING
+        type: STRING,
+        allowNull: false
       },
       last_name: {
-        type: STRING
+        type: STRING,
+        allowNull: false
       },
       email: {
         type: STRING,
-        unique: true
+        unique: true,
+        allowNull: false
       },
       role: {
-        type: ENUM('USER', 'ADMIN', 'SUPERADMIN')
+        type: ENUM('USER', 'ADMIN', 'SUPERADMIN'),
+        defaultValue: 'USER'
       },
       created_at: {
         type: DATE

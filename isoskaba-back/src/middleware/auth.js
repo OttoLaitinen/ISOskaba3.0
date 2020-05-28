@@ -9,8 +9,7 @@ module.exports = async (req, res, next) => {
   try {
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET)
 
-    /* TODO: Check that token hasn't been expired */
-    // if (new Date().getTime() > decodedToken.exp) throw new ApplicationError('Token expired', 403)
+    if (new Date().getTime() >= decodedToken.exp * 1000) throw new ApplicationError('Token expired', 403)
 
     res.locals.decodedToken = decodedToken
 
