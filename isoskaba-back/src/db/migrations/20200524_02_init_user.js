@@ -1,4 +1,4 @@
-const { STRING, DATE, BIGINT, ENUM, ARRAY } = require('sequelize')
+const { STRING, DATE, BIGINT, ENUM } = require('sequelize')
 
 module.exports = {
   up: async queryInterface => {
