@@ -5,7 +5,7 @@ class Event extends Model {}
 
 Event.init(
   {
-    eventId: {
+    id: {
       primaryKey: true,
       type: BIGINT,
       autoIncrement: true
@@ -43,7 +43,7 @@ Event.init(
   {
     underscored: true,
     sequelize,
-    modelName: 'events',
+    modelName: 'event',
     tableName: 'events'
   }
 )

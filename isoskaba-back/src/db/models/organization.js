@@ -5,16 +5,18 @@ class Organization extends Model {}
 
 Organization.init(
   {
-    organizationId: {
+    id: {
       primaryKey: true,
       type: BIGINT,
       autoIncrement: true
     },
     name: {
-      type: STRING
+      type: STRING,
+      allowNull: false
     },
     hasTutors: {
-      type: BOOLEAN
+      type: BOOLEAN,
+      defaultValue: false
     },
     createdAt: {
       type: DATE
@@ -26,7 +28,7 @@ Organization.init(
   {
     underscored: true,
     sequelize,
-    modelName: 'organizations',
+    modelName: 'organization',
     tableName: 'organizations'
   }
 )

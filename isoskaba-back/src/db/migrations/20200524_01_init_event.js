@@ -3,7 +3,7 @@ const { STRING, DATE, BIGINT, BOOLEAN, DOUBLE, INTEGER } = require('sequelize')
 module.exports = {
   up: async queryInterface => {
     await queryInterface.createTable('events', {
-      event_id: {
+      id: {
         primaryKey: true,
         type: BIGINT,
         autoIncrement: true

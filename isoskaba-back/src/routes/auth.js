@@ -1,39 +1,81 @@
-const { User } = require('../db/models')
+const { User, Organization, UserOrganizations } = require('../db/models')
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 const { ApplicationError } = require('../utils/customErrors')
+const { Op } = require('sequelize')
+const { sequelize } = require('../db/connection')
 
 const register = async (req, res) => {
-  const { username, email, password } = req.body
+  const { username, email, password, organizationIds } = req.body
 
-  if (!(username && email && password)) throw new ApplicationError('Some params missing', 400)
+  // TODO: Validate if email is correct email etc
+
+  if (!(username && email && password && organizationIds)) throw new ApplicationError('Some params missing', 400)
+  if (!(Array.isArray(organizationIds) && organizationIds.length))
+    throw new ApplicationError('Organization(s) not given', 400)
+
+  const uniqueOrganizationIds = new Set(organizationIds)
+  const assignedOrganizations = await Organization.findAll({
+    where: {
+      id: {
+        [Op.in]: [...uniqueOrganizationIds]
+      }
+    }
+  })
+  if (assignedOrganizations.length !== uniqueOrganizationIds.size)
+    throw new ApplicationError('One or more organizations invalid', 400)
+
+  const foundUser = await User.findOne({ where: { [Op.or]: [{ username }, { email }] } })
+  if (foundUser) throw new ApplicationError('Username or email already taken', 400)
 
   const salt = crypto.randomBytes(16).toString('hex')
   const hashedPassword = crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512').toString('hex')
 
-  /* TODO: Check if email already taken etc. */
+  const t = await sequelize.transaction()
+  try {
+    const createdUser = await User.create(
+      {
+        username,
+        email,
+        salt,
+        password: hashedPassword,
+        firstName: '',
+        lastName: '',
+        role: 'USER'
+      },
+      { transaction: t }
+    )
 
-  const createdUser = await User.create({
-    username,
-    email,
-    salt,
-    password: hashedPassword,
-    firstName: '',
-    lastName: '',
-    role: 'USER'
-  })
+    await UserOrganizations.bulkCreate(
+      [...uniqueOrganizationIds].map(oI => ({
+        userId: createdUser.id,
+        organizationId: oI
+      })),
+      { transaction: t }
+    )
 
-  const token = jwt.sign({ username: createdUser.username, role: createdUser.role }, process.env.TOKEN_SECRET, {
-    expiresIn: '1h'
-  })
+    await t.commit()
 
-  res.json(token)
+    // TODO: Only put guild organizations to the token
+    const token = jwt.sign(
+      { username: createdUser.username, role: createdUser.role, organizationIds: [...uniqueOrganizationIds] },
+      process.env.TOKEN_SECRET,
+      {
+        expiresIn: '1h'
+      }
+    )
+
+    res.json(token)
+  } catch (e) {
+    t.rollback()
+    throw e
+  }
 }
 
 const login = async (req, res) => {
   const { username, password } = req.body
 
-  // TODO: Check if no password given etc etc...
+  if (!(username && password)) throw new ApplicationError('Login failure', 403)
 
   const foundUser = await User.findOne({ where: { username } })
 

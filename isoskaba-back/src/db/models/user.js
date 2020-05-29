@@ -5,7 +5,7 @@ class User extends Model {}
 
 User.init(
   {
-    userId: {
+    id: {
       primaryKey: true,
       type: BIGINT,
       autoIncrement: true
@@ -28,7 +28,9 @@ User.init(
     },
     email: {
       type: STRING,
-      unique: true
+      unique: true,
+      isEmail: true,
+      allowNull: false
     },
     role: {
       type: ENUM('USER', 'ADMIN', 'SUPERADMIN')
@@ -43,7 +45,7 @@ User.init(
   {
     underscored: true,
     sequelize,
-    modelName: 'users',
+    modelName: 'user',
     tableName: 'users'
   }
 )

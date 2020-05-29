@@ -3,7 +3,7 @@ const { STRING, DATE, BIGINT, ENUM } = require('sequelize')
 module.exports = {
   up: async queryInterface => {
     await queryInterface.createTable('users', {
-      user_id: {
+      id: {
         primaryKey: true,
         type: BIGINT,
         autoIncrement: true
@@ -31,6 +31,7 @@ module.exports = {
       email: {
         type: STRING,
         unique: true,
+        isEmail: true,
         allowNull: false
       },
       role: {
