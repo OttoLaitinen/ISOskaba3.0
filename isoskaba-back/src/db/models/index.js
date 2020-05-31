@@ -2,26 +2,36 @@ const User = require('./user')
 const Organization = require('./organization')
 const Event = require('./event')
 
-const UserOrganizations = require('./userOrganizations')
+const UserOrganization = require('./userOrganizations')
+const EventOrganization = require('./eventOrganizations')
+const UserEvent = require('./userEvents')
 
-User.hasMany(UserOrganizations)
-UserOrganizations.belongsTo(User)
+// UserOrganizations
+User.hasMany(UserOrganization)
+UserOrganization.belongsTo(User)
 
-Organization.hasMany(UserOrganizations)
-UserOrganizations.belongsTo(Organization)
+Organization.hasMany(UserOrganization)
+UserOrganization.belongsTo(Organization)
 
-/* User.belongsToMany(Organization, {
-  through: UserOrganizations,
-  foreignKey: 'userId'
-})
-Organization.belongsToMany(User, {
-  through: UserOrganizations,
-  foreignKey: 'organizationId'
-}) */
+// EventOrganizations
+Event.hasMany(EventOrganization)
+EventOrganization.belongsTo(Event)
+
+Organization.hasMany(EventOrganization)
+EventOrganization.belongsTo(Organization)
+
+// UserEvents
+Event.hasMany(UserEvent)
+UserEvent.belongsTo(Event)
+
+User.hasMany(UserEvent)
+UserEvent.belongsTo(User)
 
 module.exports = {
   User,
   Organization,
   Event,
-  UserOrganizations
+  UserOrganization,
+  EventOrganization,
+  UserEvent
 }
