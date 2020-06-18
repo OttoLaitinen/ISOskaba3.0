@@ -1,8 +1,17 @@
-version: 2.1
 jobs:
-  build:
-    docker:
-      - image: 'circleci/node:latest'
+  test:
+    executor:
+      name: node/default
+      tag: '13'
     steps:
       - checkout
-      - run: echo 'hello world'
+      - node/install-packages
+      - run:
+          command: npm run test
+orbs:
+  node: 'circleci/node:latest'
+version: 2.1
+workflows:
+  test_my_app:
+    jobs:
+      - test
