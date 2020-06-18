@@ -9,7 +9,7 @@ jobs:
       - run:
           command: npm run test
 orbs:
-  node: 'circleci/node@latest'
+  node: 'circleci/node@2.0.2'
 version: 2.1
 workflows:
   test_my_app:
