@@ -13,3 +13,7 @@ ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
 COPY . /usr/src/app
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y git
