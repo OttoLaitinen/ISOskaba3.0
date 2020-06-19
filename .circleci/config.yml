@@ -23,8 +23,5 @@ jobs:
         cache-path: ~/project/node_modules
         override-ci-command: npm install
       - run: npm test
-            - node/install-packages:
-                cache-path: ~/project/node_modules
-                override-ci-command: npm install
-            - run: npm test
+
 
