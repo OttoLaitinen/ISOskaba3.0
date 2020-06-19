@@ -5,6 +5,7 @@ RUN apk add --update tar
 RUN apk add --update gzip
 RUN apk add --update ca-certificates
 RUN apk add --update openssh
+RUN apk add --update curl
 
 WORKDIR /usr/src/app
 
