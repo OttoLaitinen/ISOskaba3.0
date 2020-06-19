@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.1 # Invoke the Heroku orb
   node: circleci/node@3.0.0
+  docker: circleci/docker@1.2.1
 
 workflows:
   heroku_deploy:
@@ -19,6 +20,7 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout
+      - docker/install-docker-tools
       # Bundle install dependencies
       - node/install-packages:
           cache-path: ~/project/node_modules
