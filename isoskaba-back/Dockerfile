@@ -1,10 +1,10 @@
 FROM node:12.14-alpine
 
-RUN apt-get update && apt-get install -y git
-RUN apt-get update && apt-get install -y ssh
-RUN apt-get update && apt-get install -y tar
-RUN apt-get update && apt-get install -y gzip
-RUN apt-get update && apt-get install -y ca-certificates
+RUN apk add --update git
+RUN apk add --update tar
+RUN apk add --update gzip
+RUN apk add --update ca-certificates
+RUN apk add --update openssh
 
 WORKDIR /usr/src/app
 
