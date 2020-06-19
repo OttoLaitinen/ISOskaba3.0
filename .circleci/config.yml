@@ -8,13 +8,29 @@ orbs:
 workflows:
   heroku_deploy:
     jobs:
-      - build
+      - build-and-push
+      - build-docker:
+          requires: build-and-push
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - build
 
 jobs:
-  build:
+  build-and-push:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: vanhasalakuljettaja/isoskaba3.0-back
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: vanhasalakuljettaja/isoskaba3.0-back
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+  build-docker:
     docker:
       - image: vanhasalakuljettaja/isoskaba3.0-back
     working_directory: ~/project
