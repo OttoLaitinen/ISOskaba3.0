@@ -1,5 +1,11 @@
 FROM node:12.14-alpine
 
+RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y ssh
+RUN apt-get update && apt-get install -y tar
+RUN apt-get update && apt-get install -y gzip
+RUN apt-get update && apt-get install -y ca-certificates
+
 WORKDIR /usr/src/app
 
 CMD npm start
