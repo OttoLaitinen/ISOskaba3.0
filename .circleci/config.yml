@@ -20,8 +20,8 @@ jobs:
       - checkout
       # Bundle install dependencies
       - node/install-packages:
-        cache-path: ~/project/node_modules
-        override-ci-command: npm install
+          cache-path: ~/project/node_modules
+          override-ci-command: npm install
       - run: npm test
 
 
