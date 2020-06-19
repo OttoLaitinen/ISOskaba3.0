@@ -19,11 +19,10 @@ jobs:
     steps:
       - checkout
       # Bundle install dependencies
-      - run: npm install
-      - checklint:
-        executor: docker-image
-        steps:
-            - checkout
+      - node/install-packages:
+        cache-path: ~/project/node_modules
+        override-ci-command: npm install
+      - run: npm test
             - node/install-packages:
                 cache-path: ~/project/node_modules
                 override-ci-command: npm install
