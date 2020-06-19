@@ -19,5 +19,5 @@ jobs:
     steps:
       - checkout
       # Bundle install dependencies
-      - run: bundle install --path vendor/bundle
+      - run: npm install
 
