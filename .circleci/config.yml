@@ -13,7 +13,7 @@ workflows:
           requires: build-and-push
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
-            - build
+            - build-docker
 
 jobs:
   build-and-push:
