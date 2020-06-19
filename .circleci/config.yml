@@ -20,4 +20,5 @@ jobs:
       - checkout
       # Bundle install dependencies
       - run: npm install
+      - run: npm test
 
