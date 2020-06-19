@@ -20,7 +20,12 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout
-      - docker/install-docker-tools
+      - run:
+        name: Install Docker Compose
+        command: |
+          set -x
+          curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
       # Bundle install dependencies
       - node/install-packages:
           cache-path: ~/project/node_modules
