@@ -3,45 +3,22 @@ version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.1 # Invoke the Heroku orb
   node: circleci/node@3.0.0
-  docker: circleci/docker@1.2.1
 
 workflows:
   heroku_deploy:
     jobs:
-      - build-and-push
-      - build-docker:
-          requires: build-and-push
+      - build
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
-            - build-docker
+            - build
 
 jobs:
-  build-and-push:
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      - docker/check
-      - docker/build:
-          image: vanhasalakuljettaja/isoskaba3.0-back
-      - docker/push:
-          digest-path: /tmp/digest.txt
-          image: vanhasalakuljettaja/isoskaba3.0-back
-      - run:
-          command: |
-            echo "Digest is: $(</tmp/digest.txt)"
-  build-docker:
+  build:
     docker:
       - image: vanhasalakuljettaja/isoskaba3.0-back
     working_directory: ~/project
     steps:
       - checkout
-      - run:
-          name: Install Docker Compose
-          command: |
-            set -x
-            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-            chmod +x /usr/local/bin/docker-compose
       # Bundle install dependencies
       - node/install-packages:
           cache-path: ~/project/node_modules
