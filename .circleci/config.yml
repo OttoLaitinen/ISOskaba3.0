@@ -20,9 +20,7 @@ jobs:
     steps:
       - checkout
       # Bundle install dependencies
-      - run: npm run build
-      - node/install-packages:
-          cache-path: ~/project/node_modules
-          override-ci-command: npm install
+      - run: npm run build:ci
+      - run: npm run start:ci
 
 
