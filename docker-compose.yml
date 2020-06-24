@@ -1,14 +1,23 @@
-version: '3.7'
+version: "3.7"
 
 services:
   isoskaba-back:
     build:
       context: isoskaba-back
       args:
-        NODE_ENV: 'development'
+        NODE_ENV: "development"
     env_file:
-        - .env
-    command: 'npm run start:dev'
+      - .env
+    environment:
+      # In dev into your .env you want to define
+      # TOKEN_SECRET
+      # DB_USERNAME
+      # SWAGGER_TOKEN
+      # DB_PORT
+      # DB_PASSWORD
+      # DB_DATABASE
+      # DB_HOST
+    command: "npm run start:dev"
     ports:
       - 8080:8080
     volumes:
@@ -21,6 +30,11 @@ services:
     image: postgres:9.6.3
     env_file:
       - .env-db
+    environment: 
+      # In dev into your .env-db you want to define
+      # POSTGRES_USER
+      # POSTGRES_PASSWORD
+      # POSTGRES_DB
     volumes:
       - isoskaba-pgdata:/var/lib/postgresql/data
     container_name: isoskaba-db
