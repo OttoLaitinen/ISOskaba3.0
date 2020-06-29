@@ -25,6 +25,7 @@ jobs:
       - run: docker build -t isoskaba:latest ./isoskaba-back
       - run: docker tag isoskaba:latest registry.heroku.com/isoskaba-v3/web
       - run: docker push registry.heroku.com/isoskaba-v3/web
+      - run: docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli list
 
 
 
