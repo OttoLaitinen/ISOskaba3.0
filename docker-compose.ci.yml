@@ -2,6 +2,9 @@ version: "3.7"
 
 services: 
     isoskaba-back: 
+        image: vanhasalakuljettaja/isoskaba3.0-back:latest
+        build:
+            context: isoskaba-back
+      
 
-    isoskaba-db:
-        
+

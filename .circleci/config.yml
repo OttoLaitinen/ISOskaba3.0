@@ -15,7 +15,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: vanhasalakuljettaja/isoskaba3.0-back
+      - image: vanhasalakuljettaja/isoskaba3.0-back:latest
     working_directory: ~/project
     steps:
       - checkout
