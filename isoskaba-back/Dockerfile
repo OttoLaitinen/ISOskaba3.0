@@ -1,13 +1,5 @@
 FROM node:12.14-alpine
 
-RUN apk add --update git
-RUN apk add --update tar
-RUN apk add --update gzip
-RUN apk add --update ca-certificates
-RUN apk add --update openssh
-RUN apk add --update curl
-RUN apk add --update docker-compose
-
 WORKDIR /usr/src/app
 
 CMD npm start

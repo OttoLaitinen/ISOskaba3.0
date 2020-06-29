@@ -1,26 +1,30 @@
 version: 2.1
 
 orbs:
-  heroku: circleci/heroku@1.0.1 # Invoke the Heroku orb
   node: circleci/node@3.0.0
+
+executors:   
+  build-executor:     
+    working_directory: ~/app     
+    machine:       
+      image: ubuntu-1604:201903-01
 
 workflows:
   heroku_deploy:
     jobs:
       - build
-      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
-          requires:
-            - build
+
 
 jobs:
   build:
-    docker:
-      - image: vanhasalakuljettaja/isoskaba3.0-back:latest
-    working_directory: ~/project
+    executor: build-executor
     steps:
       - checkout
+      - run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
       # Bundle install dependencies
-      - run: npm run build:ci
-      - run: npm run start:ci
+      - run: docker build -t isoskaba:latest ./isoskaba-back
+      - run: docker tag isoskaba:latest registry.heroku.com/isoskaba-v3/web
+      - run: docker push registry.heroku.com/isoskaba-v3/web
+
 
 
