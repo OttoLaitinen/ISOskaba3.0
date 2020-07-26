@@ -1,4 +1,4 @@
-const { User, Organization, UserOrganizations } = require('../db/models')
+const { User, Organization, UserOrganization } = require('../db/models')
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 const { ApplicationError } = require('../utils/customErrors')
@@ -46,7 +46,7 @@ const register = async (req, res) => {
       { transaction: t }
     )
 
-    await UserOrganizations.bulkCreate(
+    await UserOrganization.bulkCreate(
       [...uniqueOrganizationIds].map(oI => ({
         userId: createdUser.id,
         organizationId: oI
